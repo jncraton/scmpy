@@ -19,6 +19,9 @@ def eval(sexp, env=[{"+": lambda a, b: a + b}]):
     >>> eval(['if', 0, 2, 3])
     3
 
+    >>> eval([['define', 'x', 2], 'x'])
+    2
+
     Fibonacci
     >>> eval([
     ...   ['lambda', ['fib', 'n'], ['fib', 'fib', 'n', 0, 1]],
@@ -38,6 +41,9 @@ def eval(sexp, env=[{"+": lambda a, b: a + b}]):
 
     if sexp[0] == "lambda":
         return lambda *args: eval(sexp[2], [dict(zip(sexp[1], args))] + env)
+    elif sexp[0] == "define":
+        env[0][sexp[1]] = eval(sexp[2], env)
+        return lambda sexp: eval(sexp, env)
     elif sexp[0] == "if":
         return eval(sexp[2], env) if eval(sexp[1], env) else eval(sexp[3], env)
     else:
