@@ -1,12 +1,7 @@
 from functools import partial
 from collections import ChainMap
 
-env = ChainMap(
-    {
-        "+": lambda a, b: a + b,
-        "-": lambda a, b: a - b,
-    }
-)
+env = ChainMap({"+": lambda a, b: a + b})
 
 
 def eval(sexp, env=env):
@@ -17,7 +12,7 @@ def eval(sexp, env=env):
     >>> eval(['+', 1, ['+', 2, 2]])
     5
 
-    >>> eval(['-', 2, 7])
+    >>> eval(['+', 2, -7])
     -5
 
     Anonymous `double` function
@@ -35,7 +30,7 @@ def eval(sexp, env=env):
     ...     ['lambda', ['f', 'n'], ['f', 'f', 'n', 0, 1]],
     ...     ['lambda', ['self', 'count', 'a', 'b'],
     ...         ['if', 'count',
-    ...             ['self', 'self', ['-', 'count', 1], 'b', ['+', 'a', 'b']],
+    ...             ['self', 'self', ['+', 'count', -1], 'b', ['+', 'a', 'b']],
     ...             'a']],
     ...     10
     ... ])
