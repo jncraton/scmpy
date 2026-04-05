@@ -1,10 +1,12 @@
 from functools import partial
 from collections import ChainMap
 
-env = ChainMap({
-    '+': lambda a, b: a + b,
-    '-': lambda a, b: a - b,
-})
+env = ChainMap(
+    {
+        "+": lambda a, b: a + b,
+        "-": lambda a, b: a - b,
+    }
+)
 
 
 def eval(sexp, env=env):
