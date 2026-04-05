@@ -12,7 +12,7 @@ A minimal Scheme interpreter written in Python
 1. Basic arithmetic
 2. Lambda expressions
 3. Conditional logic
-4. Environment management
+4. Variable definition
 
 # Usage
 
@@ -38,12 +38,16 @@ The project demonstrates computing [Fibonacci numbers](https://en.wikipedia.org/
 ```python
 from scm import eval
 fib = [
-    ['lambda', ['f', 'n'], ['f', 'f', 'n', 0, 1]],
-    ['lambda', ['self', 'count', 'cur', 'next'],
+    ['lambda', ['fib', 'n'], ['fib', 'fib', 'n', 0, 1]],
+    ['lambda', ['f', 'count', 'cur', 'next'],
         ['if', 'count',
-            ['self', 'self', ['-', 'count', 1], 'next', ['+', 'cur', 'next']],
+            ['f', 'f', ['+', 'count', -1], 'next', ['+', 'cur', 'next']],
             'cur']],
     10
 ]
 print(eval(fib))
 ```
+
+# Reference
+
+Reference implementations of the Fibonacci Y-combinator are provided in fib-ycombinator.scm and fib-ycombinator.js.
