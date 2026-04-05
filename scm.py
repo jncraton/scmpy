@@ -22,7 +22,7 @@ def eval(sexp, env=[{"+": lambda a, b: a + b}]):
     >>> eval([['define', 'x', 2], 'x'])
     2
 
-    Fibonacci
+    Fibonacci (Y-combinator)
     >>> eval([
     ...   ['lambda', ['fib', 'n'], ['fib', 'fib', 'n', 0, 1]],
     ...   ['lambda', ['f', 'count', 'cur', 'next'],
@@ -30,6 +30,19 @@ def eval(sexp, env=[{"+": lambda a, b: a + b}]):
     ...       ['f', 'f', ['+', 'count', -1], 'next', ['+', 'cur', 'next']],
     ...        'cur'],
     ...   ], 10
+    ... ])
+    55
+
+    Fibonacci (define)
+    >>> eval([
+    ...   ['define', 'fib',
+    ...     ['lambda', ['n'],
+    ...       ['if', ['+', 'n', -1],
+    ...         ['if', ['+', 'n', -2],
+    ...           ['+', ['fib', ['+', 'n', -1]], ['fib', ['+', 'n', -2]]],
+    ...           1],
+    ...         1]]],
+    ...   ['fib', 10]
     ... ])
     55
     """
