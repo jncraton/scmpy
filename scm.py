@@ -1,7 +1,4 @@
-env = [{"+": lambda a, b: a + b}]
-
-
-def eval(sexp, env=env):
+def eval(sexp, env=[{"+": lambda a, b: a + b}]):
     """
     >>> eval(['+', 1, 1])
     2
