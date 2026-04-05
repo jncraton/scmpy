@@ -1,5 +1,10 @@
 # scmpy
 
+[![Release](https://github.com/jncraton/scmpy/actions/workflows/release.yml/badge.svg)](https://github.com/jncraton/scmpy/actions/workflows/release.yml)
+[![Deploy](https://github.com/jncraton/scmpy/actions/workflows/deploy.yml/badge.svg)](https://github.com/jncraton/scmpy/actions/workflows/deploy.yml)
+[![Test](https://github.com/jncraton/scmpy/actions/workflows/test.yml/badge.svg)](https://github.com/jncraton/scmpy/actions/workflows/test.yml)
+[![Lint](https://github.com/jncraton/scmpy/actions/workflows/lint.yml/badge.svg)](https://github.com/jncraton/scmpy/actions/workflows/lint.yml)
+
 A minimal Scheme interpreter written in Python
 
 # Features
