@@ -39,10 +39,10 @@ The project demonstrates computing [Fibonacci numbers](https://en.wikipedia.org/
 from scm import eval
 fib = [
     ['lambda', ['f', 'n'], ['f', 'f', 'n', 0, 1]],
-    ['lambda', ['self', 'count', 'current', 'next'],
+    ['lambda', ['self', 'count', 'cur', 'next'],
         ['if', 'count',
-            ['self', 'self', ['-', 'count', 1], 'next', ['+', 'current', 'next']],
-            'current']],
+            ['self', 'self', ['-', 'count', 1], 'next', ['+', 'cur', 'next']],
+            'cur']],
     10
 ]
 print(eval(fib))

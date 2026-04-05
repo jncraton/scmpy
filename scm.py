@@ -21,12 +21,12 @@ def eval(sexp, env=[{"+": lambda a, b: a + b}]):
 
     Fibonacci
     >>> eval([
-    ...     ['lambda', ['f', 'n'], ['f', 'f', 'n', 0, 1]],
-    ...     ['lambda', ['self', 'count', 'current', 'next'],
-    ...         ['if', 'count',
-    ...             ['self', 'self', ['+', 'count', -1], 'next', ['+', 'current', 'next']],
-    ...             'current']],
-    ...     10
+    ...   ['lambda', ['fib', 'n'], ['fib', 'fib', 'n', 0, 1]],
+    ...   ['lambda', ['f', 'count', 'cur', 'next'],
+    ...     ['if', 'count',
+    ...       ['f', 'f', ['+', 'count', -1], 'next', ['+', 'cur', 'next']],
+    ...        'cur'],
+    ...   ], 10
     ... ])
     55
     """
