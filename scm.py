@@ -1,9 +1,10 @@
 from functools import partial
 
 env = {
-    '+': lambda a, b: a + b,
-    '-': lambda a, b: a - b,
+    "+": lambda a, b: a + b,
+    "-": lambda a, b: a - b,
 }
+
 
 def eval(sexp, env=env):
     """
@@ -43,9 +44,9 @@ def eval(sexp, env=env):
     if not isinstance(sexp, list):
         return sexp
 
-    if sexp[0] == 'lambda':
+    if sexp[0] == "lambda":
         return lambda *args: eval(sexp[2], env | dict(zip(sexp[1], args)))
-    elif sexp[0] == 'if':
+    elif sexp[0] == "if":
         return eval(sexp[2], env) if eval(sexp[1], env) else eval(sexp[3], env)
     else:
         return eval(sexp[0], env)(*map(partial(eval, env=env), sexp[1:]))
