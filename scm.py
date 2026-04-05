@@ -22,10 +22,10 @@ def eval(sexp, env=[{"+": lambda a, b: a + b}]):
     Fibonacci
     >>> eval([
     ...     ['lambda', ['f', 'n'], ['f', 'f', 'n', 0, 1]],
-    ...     ['lambda', ['self', 'count', 'a', 'b'],
+    ...     ['lambda', ['self', 'count', 'current', 'next'],
     ...         ['if', 'count',
-    ...             ['self', 'self', ['+', 'count', -1], 'b', ['+', 'a', 'b']],
-    ...             'a']],
+    ...             ['self', 'self', ['+', 'count', -1], 'next', ['+', 'current', 'next']],
+    ...             'current']],
     ...     10
     ... ])
     55
