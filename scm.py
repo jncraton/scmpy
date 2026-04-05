@@ -41,3 +41,14 @@ def eval(sexp, env=env):
             return eval(sexp[2], env) if condition else eval(sexp[3], env)
         else:
             return eval(sexp[0], env)(*map(partial(eval, env=env), sexp[1:]))
+
+print(eval(
+[['lambda', ['f', 'n'],
+   ['f', 'f', 'n', 0, 1]],
+ ['lambda', ['self', 'count', 'a', 'b'],
+   ['if', 'count',
+       ['self', 'self', ['-', 'count', 1], 'b', ['+', 'a', 'b']],
+       'a']],
+ 10]
+
+))
