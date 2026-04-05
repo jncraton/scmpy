@@ -1,4 +1,3 @@
-from functools import partial
 from collections import ChainMap
 
 env = ChainMap({"+": lambda a, b: a + b})
@@ -47,4 +46,4 @@ def eval(sexp, env=env):
     elif sexp[0] == "if":
         return eval(sexp[2], env) if eval(sexp[1], env) else eval(sexp[3], env)
     else:
-        return eval(sexp[0], env)(*map(partial(eval, env=env), sexp[1:]))
+        return eval(sexp[0], env)(*[eval(arg, env) for arg in sexp[1:]])
