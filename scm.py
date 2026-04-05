@@ -46,7 +46,7 @@ def eval(sexp, env=env):
         if sexp[0] == 'lambda':
             names = sexp[1]
             body = sexp[2]
-            return lambda *args: eval(body, env | {k:v for k,v in zip(names, args)})
+            return lambda *args: eval(body, env | dict(zip(names, args)))
         elif sexp[0] == 'if':
             condition = eval(sexp[1], env)
             return eval(sexp[2], env) if condition else eval(sexp[3], env)
