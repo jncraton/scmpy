@@ -1,6 +1,4 @@
-from collections import ChainMap
-
-env = ChainMap({"+": lambda a, b: a + b})
+env = [{"+": lambda a, b: a + b}]
 
 
 def eval(sexp, env=env):
@@ -37,12 +35,12 @@ def eval(sexp, env=env):
     """
 
     if isinstance(sexp, str):
-        return env[sexp]
+        return next(scope[sexp] for scope in env if sexp in scope)
     if not isinstance(sexp, list):
         return sexp
 
     if sexp[0] == "lambda":
-        return lambda *args: eval(sexp[2], env.new_child(dict(zip(sexp[1], args))))
+        return lambda *args: eval(sexp[2], [dict(zip(sexp[1], args))] + env)
     elif sexp[0] == "if":
         return eval(sexp[2], env) if eval(sexp[1], env) else eval(sexp[3], env)
     else:
