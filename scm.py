@@ -15,6 +15,12 @@ def eval(sexp, env=env):
     Anonymous `double` function
     >>> eval([['lambda', ['n'], ['+', 'n', 'n']], 2])
     4
+
+    >>> eval(['if', 1, 2, 3])
+    2
+
+    >>> eval(['if', 0, 2, 3])
+    3
     """
 
     if isinstance(sexp, int):
@@ -26,5 +32,8 @@ def eval(sexp, env=env):
             names = sexp[1]
             body = sexp[2]
             return lambda *args: eval(body, env | {k:v for k,v in zip(names, args)})
+        elif sexp[0] == 'if':
+            condition = eval(sexp[1], env)
+            return eval(sexp[2], env) if condition else eval(sexp[3], env)
         else:
             return eval(sexp[0], env)(*map(partial(eval, env=env), sexp[1:]))
