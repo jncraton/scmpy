@@ -2,6 +2,7 @@ from functools import partial
 
 env = {
     '+': lambda a, b: a + b,
+    '-': lambda a, b: a - b,
 }
 
 def eval(sexp, env=env):
@@ -11,6 +12,9 @@ def eval(sexp, env=env):
 
     >>> eval(['+', 1, ['+', 2, 2]])
     5
+
+    >>> eval(['-', 2, 7])
+    -5
 
     Anonymous `double` function
     >>> eval([['lambda', ['n'], ['+', 'n', 'n']], 2])
