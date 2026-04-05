@@ -38,17 +38,17 @@ def eval(sexp, env=env):
     55
     """
 
-    if isinstance(sexp, int):
-        return sexp
     if isinstance(sexp, str):
         return env[sexp]
-    elif isinstance(sexp, list):
-        if sexp[0] == 'lambda':
-            names = sexp[1]
-            body = sexp[2]
-            return lambda *args: eval(body, env | dict(zip(names, args)))
-        elif sexp[0] == 'if':
-            condition = eval(sexp[1], env)
-            return eval(sexp[2], env) if condition else eval(sexp[3], env)
-        else:
-            return eval(sexp[0], env)(*map(partial(eval, env=env), sexp[1:]))
+    if not isinstance(sexp, list):
+        return sexp
+
+    if sexp[0] == 'lambda':
+        names = sexp[1]
+        body = sexp[2]
+        return lambda *args: eval(body, env | dict(zip(names, args)))
+    elif sexp[0] == 'if':
+        condition = eval(sexp[1], env)
+        return eval(sexp[2], env) if condition else eval(sexp[3], env)
+    else:
+        return eval(sexp[0], env)(*map(partial(eval, env=env), sexp[1:]))
