@@ -33,7 +33,6 @@ def eval(sexp, env=[{"+": lambda a, b: a + b}]):
     ... ])
     55
     """
-
     if isinstance(sexp, str):
         return next(scope[sexp] for scope in env if sexp in scope)
     if not isinstance(sexp, list):
@@ -43,8 +42,9 @@ def eval(sexp, env=[{"+": lambda a, b: a + b}]):
         return lambda *args: eval(sexp[2], [dict(zip(sexp[1], args))] + env)
     elif sexp[0] == "define":
         env[0][sexp[1]] = eval(sexp[2], env)
-        return lambda sexp: eval(sexp, env)
     elif sexp[0] == "if":
         return eval(sexp[2], env) if eval(sexp[1], env) else eval(sexp[3], env)
     else:
-        return eval(sexp[0], env)(*[eval(arg, env) for arg in sexp[1:]])
+        results = [eval(expr, env) for expr in sexp]
+
+        return results[0](*results[1:]) if callable(results[0]) else results[-1]
