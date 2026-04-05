@@ -1,7 +1,7 @@
 all: test
 
 test:
-	python3 -m doctest scm.py
+	uv run python -m doctest scm.py
 
 lint:
 	uvx black@24.1.0 --check .
