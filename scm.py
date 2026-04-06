@@ -15,12 +15,17 @@ def eval(sexp, env=[{"+": lambda a, b: a + b}]):
     >>> eval([['+', 1, 1], ['+', 2, 2]])
     4
 
+    Nested subexpressions are properly evaluated
+
     >>> eval(['+', 1, ['+', 2, 2]])
     5
 
-    Anonymous `double` function
+    `lambda` creates anonymous functions
+
     >>> eval([['lambda', ['n'], ['+', 'n', 'n']], 2])
     4
+
+    `if` provides a ternary operator with short-circuit evaluation
 
     >>> eval(['if', 1, 2, 3])
     2
@@ -28,10 +33,13 @@ def eval(sexp, env=[{"+": lambda a, b: a + b}]):
     >>> eval(['if', 0, 2, 3])
     3
 
+    `define` binds a value to a name in the current scope
+
     >>> eval([['define', 'x', 2], 'x'])
     2
 
-    Fibonacci (Y-combinator)
+    n-th Fibonacci computation using Y-combinator
+
     >>> eval([
     ...   ['lambda', ['f', 'n'], ['f', 'f', 'n', 0, 1]],
     ...   ['lambda', ['self', 'count', 'cur', 'next'],
@@ -42,7 +50,8 @@ def eval(sexp, env=[{"+": lambda a, b: a + b}]):
     ... ])
     55
 
-    Fibonacci (define)
+    n-th Fibonacci computation using `define`
+
     >>> eval([
     ...   ['define', 'fib',
     ...     ['lambda', ['n'],
