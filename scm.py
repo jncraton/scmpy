@@ -2,6 +2,16 @@ def eval(sexp, env=[{"+": lambda a, b: a + b}]):
     """
     Evaluates `sexp` in `env`
 
+    Literal values are returned.
+
+    >>> eval(1)
+    1
+
+    Sequences of values return the last value.
+
+    >>> eval([1, 2, 3])
+    3
+
     Function evaluation uses prefix notation.
 
     `+` is provided as a function in the default global `env`
