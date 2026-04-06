@@ -3,11 +3,11 @@ def eval(sexp, env=[{"+": lambda a, b: a + b}]):
     >>> eval(['+', 1, 1])
     2
 
-    >>> eval(['+', 1, ['+', 2, 2]])
-    5
-
     >>> eval(['+', 2, -7])
     -5
+
+    >>> eval(['+', 1, ['+', 2, 2]])
+    5
 
     Anonymous `double` function
     >>> eval([['lambda', ['n'], ['+', 'n', 'n']], 2])
