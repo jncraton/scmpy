@@ -24,6 +24,14 @@ def eval(sexp, env=[{"+": lambda a, b: a + b}]):
     >>> eval(['+', 1, ['+', 2, 2]])
     5
 
+    Nested scopes shadow values
+
+    >>> eval('x', env=[{'x': 1}])
+    1
+
+    >>> eval('x', env=[{'x': 2}, {'x': 4}])
+    2
+
     `lambda` creates anonymous functions
 
     >>> eval([['lambda', ['n'], ['+', 'n', 'n']], 2])
