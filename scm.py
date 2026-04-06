@@ -2,8 +2,6 @@ def eval(sexp, env=[{"+": lambda a, b: a + b}]):
     """
     Evaluates `sexp` in `env`
 
-    Examples
-
     Function evaluation uses prefix notation.
 
     `+` is provided as a function in the default global `env`
