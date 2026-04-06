@@ -1,10 +1,16 @@
 def eval(sexp, env=[{"+": lambda a, b: a + b}]):
     """
+    Examples
+
+    Function evaluation uses prefix notation
+
     >>> eval(['+', 1, 1])
     2
 
     >>> eval(['+', 2, -7])
     -5
+
+    Sequences or expressions return the value of the last expression
 
     >>> eval([['+', 1, 1], ['+', 2, 2]])
     4
